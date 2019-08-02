@@ -1,0 +1,15 @@
+span {
+    border: 10px;
+    background-color: aqua;
+}
+
+.fields {
+    padding-bottom: 10px;
+}
+
+.btn {
+    grid-column: auto;
+}
+html{
+    background-color: darkgreen;
+}

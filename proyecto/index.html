@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Fibonacci</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+  <div>
+    <div class="fields">
+        <fieldset>
+            <legend>Numero Fibonacci</legend>
+            <div id="tfibonacci"></div>
+            <div id="bfibonacci"></div>
+        </fieldset>
+    </div>  
+
+    <div class="fields">
+        <fieldset>
+            <legend>Numero Padovan</legend>
+            <div id="tpadovan"></div>
+            <div id="bpadovan"></div>
+        </fieldset>
+    </div>  
+
+    <div class="fields">
+        <fieldset>
+            <legend>Numero De La Suerte</legend>
+            <div id="tsuerte"></div>
+            <div id="bsuerte"></div>
+        </fieldset>
+    </div> 
+    
+    <div class="fields">
+        <fieldset>
+            <legend>Numero Ulam</legend>
+            <div id="tulam"></div>
+            <div id="bulam"></div>
+        </fieldset>
+    </div> 
+      
+    <div class="fields">
+        <fieldset>
+          <legend>Conversiones</legend>
+            <div id="ventana">
+                <div id="BH" >
+                  <label for="">Binario</label>
+                  <div id="binario" class="fields">
+                  </div>
+                  <label for="">Hexadecimal</label>
+                  <div id="hexadecimal" class="fields">
+                  </div>
+                  <label for="">Feliz</label>
+                  <div id="feliz" class="fields">
+                    </div>
+                </div>
+                
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="btnr"></div>
+      
+  </div>
+    
+  <script src="./js/componentes/Boton.js"></script>
+  <script src="./js/componentes/Textfield.js"></script>
+  <script src="./js/componentes/Ventana.js"></script>
+  <script src="./js/dominio/Convert.js"></script>
+  <script src="./js/dominio/NumeroFibonacci.js"></script>
+  <script src="./js/dominio/NumeroPadovan.js"></script>
+  <script src="./js/dominio/NumeroUlam.js"></script>
+  <script src="./js/dominio/NumeroSuerte.js"></script>
+
+  <script type="text/javascript">
+
+    /*
+    * OBJETOS DE DOMINIO
+    */
+
+    var fibonacci = new NumeroFibonacci(0,0,0,0,0); 
+    var padovan = new SucesionPadovan();
+    var suerte = new NumeroDeSuerte();
+    var ulam = new NumeroDeUlam();
+    var convertidor = Conver;
+
+
+    /*
+    * BOTONES PARA CADA NUMERO
+    */
+
+    var af = new Boton("avanzar");
+    var ap = new Boton("avanzar");
+    var as = new Boton("avanzar");
+    var au = new Boton("avanzar");
+    var retroceder = new Boton("retroceder");
+
+    document.getElementById("bfibonacci").appendChild(af.componente);
+    document.getElementById("bpadovan").appendChild(ap.componente);
+    document.getElementById("bsuerte").appendChild(as.componente);
+    document.getElementById("bulam").appendChild(au.componente);
+    document.getElementById("btnr").appendChild(retroceder.componente);
+
+    /*
+    * TEXTFIELDS PARA CADA NUMERO
+    */
+
+    var tfibonacci = new TextField("tefibonacci");
+    var tpadova = new TextField("tepadovan");
+    var tsuerte = new TextField("tesuerte");
+    var tulam = new TextField("teulam");
+
+    document.getElementById("tfibonacci").appendChild(tfibonacci.componente);
+    document.getElementById("tpadovan").appendChild(tpadova.componente);
+    document.getElementById("tsuerte").appendChild(tsuerte.componente);
+    document.getElementById("tulam").appendChild(tulam.componente);
+
+    
+    /*
+    * TEXTFIELDS PARA CADA CONVERSIONES
+    */
+
+    var binario = new TextField("tbinario");
+    var hexadecimal = new TextField("thexadecimal");
+    var feliz = new TextField("tfeliz");
+
+    document.getElementById("binario").appendChild(binario.componente);
+    document.getElementById("hexadecimal").appendChild(hexadecimal.componente);
+    document.getElementById("feliz").appendChild(feliz.componente);
+   
+    
+    /*
+    * EVENTOS DE BOTONES
+    */
+
+    af.componente.addEventListener('click',function() {
+      fibonacci.avanzar();
+      tfibonacci.actualizarvalor( fibonacci.getValor() );
+      binario.actualizarvalor( convertidor.binario( fibonacci.getValor() ) );
+      hexadecimal.actualizarvalor( convertidor.hexadecimal( fibonacci.getValor() ) );
+      feliz.actualizarvalor(  );
+    },false);
+
+    ap.componente.addEventListener('click',function() {
+      padovan.avanzar();
+      tpadova.actualizarvalor( padovan.getValor() );
+      binario.actualizarvalor( convertidor.binario( padovan.getValor() ) );
+      hexadecimal.actualizarvalor( convertidor.hexadecimal( padovan.getValor() ) );
+      
+    },false);
+
+    as.componente.addEventListener('click',function() {
+      suerte.avanzar();
+      tsuerte.actualizarvalor( suerte.actual() );
+      binario.actualizarvalor( convertidor.binario( suerte.actual() ) );
+      hexadecimal.actualizarvalor( convertidor.hexadecimal( suerte.actual() ) );
+      
+    },false);
+
+    au.componente.addEventListener('click',function() {
+      ulam.avanzar();
+      tulam.actualizarvalor( ulam.actual() );
+      binario.actualizarvalor( convertidor.binario( ulam.actual() ) );
+      hexadecimal.actualizarvalor( convertidor.hexadecimal( ulam.actual() ) );
+    },false);
+
+    retroceder.componente.addEventListener('click',function(){
+      fibonacci.retroceder();
+      padovan.retroceder();
+      suerte.retroceder();
+      ulam.retroceder();
+      tfibonacci.actualizarvalor( fibonacci.getValor() );
+      tpadova.actualizarvalor( padovan.getValor() );
+      tsuerte.actualizarvalor( suerte.actual() );
+      tulam.actualizarvalor( ulam.actual() );
+      
+    },false);
+
+  </script>
+   
+</body>
+</html>
